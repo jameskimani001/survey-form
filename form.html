@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Survey Form</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+  <!-- 1 & 2: Page title with id="title" -->
+  <h1 id="title">Customer Satisfaction Survey</h1>
+
+  <!-- 3 & 4: Short explanation with id="description" -->
+  <p id="description">
+    Please fill out this survey to help us improve our services.
+  </p>
+
+  <!-- 5: Form with id="survey-form" -->
+  <form id="survey-form">
+
+    <!-- 19, 22, 25: Label for name input -->
+    <label id="name-label" for="name">Name:</label>
+    <!-- 6, 7, 8, 9, 28: Required text input with placeholder -->
+    <input 
+      type="text" 
+      id="name" 
+      name="name" 
+      placeholder="Enter your full name" 
+      required
+    />
+
+    <br /><br />
+
+    <!-- 20, 23, 26: Label for email input -->
+    <label id="email-label" for="email">Email:</label>
+    <!-- 10, 11, 12, 13, 29: Required email input with placeholder -->
+    <input 
+      type="email" 
+      id="email" 
+      name="email" 
+      placeholder="Enter your email address" 
+      required
+    />
+
+    <br /><br />
+
+    <!-- 21, 24, 27: Label for number input -->
+    <label id="number-label" for="number">Age (optional):</label>
+    <!-- 14, 15, 16, 17, 18, 30: Number input with min, max, placeholder -->
+    <input 
+      type="number" 
+      id="number" 
+      name="age" 
+      placeholder="Enter your age" 
+      min="10" 
+      max="99"
+    />
+
+    <br /><br />
+
+    <!-- 31, 32, 33: Select dropdown -->
+    <label for="dropdown">How did you hear about us?</label>
+    <select id="dropdown" name="referral" required>
+      <option value="" disabled selected>Select an option</option>
+      <option value="friends">Friends or Family</option>
+      <option value="social-media">Social Media</option>
+      <option value="advertisement">Advertisement</option>
+      <option value="other">Other</option>
+    </select>
+
+    <br /><br />
+
+    <!-- 34, 35, 36, 37, 38: Radio buttons group -->
+    <fieldset>
+      <legend>How satisfied are you with our product?</legend>
+      <input type="radio" id="very-satisfied" name="satisfaction" value="very" required />
+      <label for="very-satisfied">Very Satisfied</label><br />
+
+      <input type="radio" id="satisfied" name="satisfaction" value="satisfied" />
+      <label for="satisfied">Satisfied</label><br />
+
+      <input type="radio" id="neutral" name="satisfaction" value="neutral" />
+      <label for="neutral">Neutral</label><br />
+
+      <input type="radio" id="unsatisfied" name="satisfaction" value="unsatisfied" />
+      <label for="unsatisfied">Unsatisfied</label>
+    </fieldset>
+
+    <br />
+
+    <!-- 39, 40: Checkboxes group -->
+    <fieldset>
+      <legend>Which features do you use? (Select all that apply)</legend>
+      <input type="checkbox" id="feature1" name="features" value="feature1" />
+      <label for="feature1">Feature 1</label><br />
+
+      <input type="checkbox" id="feature2" name="features" value="feature2" />
+      <label for="feature2">Feature 2</label><br />
+
+      <input type="checkbox" id="feature3" name="features" value="feature3" />
+      <label for="feature3">Feature 3</label><br />
+    </fieldset>
+
+    <br />
+
+    <!-- 41: Textarea for additional comments -->
+    <label for="comments">Additional Comments:</label><br />
+    <textarea id="comments" name="comments" rows="4" cols="50" placeholder="Your feedback here..."></textarea>
+
+    <br /><br />
+
+    <!-- 42, 43, 44: Submit button -->
+    <button type="submit" id="submit">Submit</button>
+    
+  </form>
+<script>
+  const form = document.getElementById('survey-form');
+
+  form.addEventListener('submit', function(event) {
+    event.preventDefault(); // Prevent form from submitting normally (no page reload)
+
+    // Collect form data
+    const formData = new FormData(form);
+    const entries = Object.fromEntries(formData.entries());
+
+    // For checkboxes (multiple values), get all checked values separately
+    const checkboxes = form.querySelectorAll('input[type="checkbox"]:checked');
+    entries.features = Array.from(checkboxes).map(cb => cb.value);
+
+    console.log('Form submission data:', entries);
+
+    // Optionally, you can reset the form after submission:
+    // form.reset();
+  });
+</script>
+
+</body>
+</html>
